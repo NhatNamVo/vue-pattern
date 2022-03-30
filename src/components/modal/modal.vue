@@ -1,62 +1,88 @@
 <template>
   <section class="itemmodal">
     <h1 class="itemmodal__title">
-      {{ titleModal }}
+      {{ modalTitle }}
     </h1>
     <div class="itemmodal__form">
       <b-row>
-        <b-col cols='6' class="form__item">
+        <b-col cols="6" class="form__item">
           <label class="form__title">ITEM NAME</label>
-          <b-form-input v-model="itemName" class="form__input" type="text" />
+          <b-form-input
+            :value="itemInfo.name"
+            name="name"
+            @input="$emit('input', $event, 'name')"
+            class="form__input"
+            type="text"
+          />
         </b-col>
-        <b-col cols='6' class="form__item">
+        <b-col cols="6" class="form__item">
           <label class="form__title">FOOD CATEGORY</label>
-          <b-form-select class="form__select">
+          <b-form-select
+            :value="itemInfo.category"
+            name="category"
+            @input="$emit('input', $event, 'category')"
+            class="form__select"
+          >
             <template v-for="(item, index) in categories">
-              <option :key="index" value="item">{{ item }}</option>
+              <option :key="index" :value="item">{{ item }}</option>
             </template>
           </b-form-select>
         </b-col>
-        <b-col cols='6' class="form__item">
+        <b-col cols="6" class="form__item">
           <label class="form__title">ORIGINAL QUANTITY</label>
-          <b-form-input class="form__input" type="number" />
+          <b-form-input
+            :value="itemInfo.oriQty"
+            name="oriQty"
+            @input="$emit('input', $event, 'oriQty')"
+            class="form__input"
+            type="number"
+          />
         </b-col>
-        <b-col cols='6' class="form__item">
+        <b-col cols="6" class="form__item">
           <label class="form__title">QUANTITY LEFT</label>
-          <b-form-input class="form__input" type="number" />
+          <b-form-input
+            :value="itemInfo.leftQty"
+            name="leftQty"
+            @input="$emit('input', $event, 'leftQty')"
+            class="form__input"
+            type="number"
+          />
         </b-col>
-        <b-col cols='6' class="form__item">
+        <b-col cols="6" class="form__item">
           <label class="form__title">EXPIRY DATE</label>
-          <b-form-datepicker :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }" class="form__input" locale="vi" />
+          <b-form-datepicker
+            :value="itemInfo.expireDate"
+            name="expireDate"
+            @input="$emit('input', $event, 'expireDate')"
+            :date-format-options="{
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+            }"
+            class="form__input"
+            locale="vi"
+          />
         </b-col>
       </b-row>
     </div>
-    <button class="btn" :class="buttonClass">Submit</button>
+    <button @click="$emit('form-submit')" class="btn" :class="buttonClass">
+      Submit
+    </button>
   </section>
 </template>
 <script>
 import { mapState } from "vuex";
 export default {
   name: "modalComponent",
-  data() {
-    return {
-      itemName: "",
-      itemCategory: '',
-      itemQuantity : 0,
-      itemQuantityLeft : 0,
-      itemExpire: ''
-    };
+  model: {
+    prop: 'itemInfo',
+    event: 'input'
   },
+  props: ['itemInfo',"modalTitle", "buttonClass"],
   computed: {
     ...mapState({
       categories: (state) => state.inventory.categories,
     }),
-    titleModal() {
-      return "Add new item to inventory";
-    },
-    buttonClass() {
-      return "btn__add";
-    },
   },
 };
 </script>
