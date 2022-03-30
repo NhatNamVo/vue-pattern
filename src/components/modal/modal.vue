@@ -10,7 +10,7 @@
           <b-form-input
             :value="itemInfo.name"
             name="name"
-            @input="$emit('input', $event, 'name')"
+            @input="$emit('input', {...itemInfo, name:$event})"
             class="form__input"
             type="text"
           />
@@ -20,7 +20,7 @@
           <b-form-select
             :value="itemInfo.category"
             name="category"
-            @input="$emit('input', $event, 'category')"
+            @input="$emit('input', {...itemInfo, category:$event})"
             class="form__select"
           >
             <template v-for="(item, index) in categories">
@@ -33,7 +33,7 @@
           <b-form-input
             :value="itemInfo.oriQty"
             name="oriQty"
-            @input="$emit('input', $event, 'oriQty')"
+            @input="$emit('input', {...itemInfo, oriQty:$event})"
             class="form__input"
             type="number"
           />
@@ -43,7 +43,7 @@
           <b-form-input
             :value="itemInfo.leftQty"
             name="leftQty"
-            @input="$emit('input', $event, 'leftQty')"
+            @input="$emit('input', {...itemInfo, leftQty:$event})"
             class="form__input"
             type="number"
           />
@@ -53,7 +53,7 @@
           <b-form-datepicker
             :value="itemInfo.expireDate"
             name="expireDate"
-            @input="$emit('input', $event, 'expireDate')"
+            @input="$emit('input', {...itemInfo, expireDate:$event})"
             :date-format-options="{
               year: 'numeric',
               month: 'numeric',
@@ -78,12 +78,14 @@ export default {
     prop: 'itemInfo',
     event: 'input'
   },
-  props: ['itemInfo',"modalTitle", "buttonClass"],
+  props: ["itemInfo","modalTitle", "buttonClass"],
   computed: {
     ...mapState({
       categories: (state) => state.inventory.categories,
     }),
   },
+  methods: {
+  }
 };
 </script>
 <style lang="scss" scoped>
