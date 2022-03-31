@@ -20,12 +20,18 @@
                 padding: 3px;
                 font-size: 12px;
                 border: none;
-                border-bottom: 1px solid #7a6247;
+                border-bottom: 1px solid $border-color-form;
                 border-radius: 0;
                 &:focus{
                     outline: none;
                     box-shadow: none;
                 }
+            }
+            input.error, select.error {
+                border-color: $border-color-form-error;
+            }
+            &--error{
+                color: $text-color-danger;
             }
         }
     }

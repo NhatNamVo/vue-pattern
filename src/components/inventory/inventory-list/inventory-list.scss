@@ -1,3 +1,8 @@
 .listContainer{
     margin-top: 20px;
+    .no-item{
+        margin: 50px 0;
+        color: $text-color-no-item;
+        font-weight: bold;
+    }
 }

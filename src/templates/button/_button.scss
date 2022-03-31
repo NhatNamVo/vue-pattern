@@ -1,0 +1,25 @@
+.btn-app{
+    padding: 5px 10px;
+    text-align: center;
+    border: none;
+    color: #fff;
+    box-shadow: 0 4px 8px 0 #ccc;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 5px;
+}
+.btn__add{
+    background-color: $btn-color-add;
+}
+.btn__update{
+    background-color: $btn-color-update;
+}
+.btn__delete{
+    background-color: $btn-color-delete;
+}
+.btn__cancel{
+    background-color: $btn-color-cancel;
+}
+.btn__submit{
+    background-color: $btn-color-add;
+}

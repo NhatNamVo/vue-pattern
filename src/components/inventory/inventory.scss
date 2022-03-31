@@ -1,8 +1,12 @@
 .inventory{
-    width: 80%;
+    width: 100%;
     margin: 20px auto;
     padding: 10px;
-    background-color: #ccccccb6;
-    box-shadow: 0 3px 8px 0 #ccccccc2;
+    background-color: $color-bg-list;
+    box-shadow: 0 3px 8px 0 #ccc;
+    border-radius: 5px;
     min-height: 50vh;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

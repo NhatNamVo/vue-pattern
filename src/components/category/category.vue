@@ -1,13 +1,13 @@
 <template>
   <section class="category">
-    <category-item :itemName="'All'" :active="{'active':active===null}" @select-category="selectCategory(null)"/>
+    <category-item :itemName="'All'" :active="{'active':active===null}" @select-category="handleSelectCategory(null)"/>
     <template v-for="(item, index) in categories">
-      <category-item :key="index" :item-name="item" :active="{'active':active===index}" @select-category="selectCategory(index)"/>
+      <category-item :key="index" :item-name="item" :active="{'active':active===index}" @select-category="handleSelectCategory(index)"/>
     </template>
   </section>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import categoryItem from './category-item/category-item.vue';
 export default {
   name: "categoryComponent",
@@ -21,8 +21,9 @@ export default {
     }),
   },
   methods: {
-    selectCategory(selected) {
-      console.log('selected:', selected);
+    ...mapMutations(['selectCategory']),
+    handleSelectCategory(selected) {
+      this.selectCategory(selected);
     }
   }
 };

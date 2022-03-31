@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Inventory</h1>
+    <h1 class="app-title">Inventory</h1>
     <category-component/>
     <inventory-component/>
   </div>
@@ -18,13 +18,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  max-width: 1024px;
+  margin: auto;
 }
+@import './App';
 </style>

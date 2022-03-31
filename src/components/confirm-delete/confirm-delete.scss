@@ -1,0 +1,11 @@
+.confirm{
+    text-align: center;
+    h3{
+        color: $text-color-danger;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    button{
+        margin: 20px 10px 0;
+    }
+}
