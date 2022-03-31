@@ -1,6 +1,6 @@
 .inventory-item{
     text-align: left;
-    padding: 10px;
+    padding: $padding-item;
     margin: 15px 0; 
     box-shadow: 0 4px 8px 0 $color-shadow-standard;
     background-color: $color-bg-white;
@@ -21,14 +21,14 @@
         padding:0 20px;
         h1{
             font-weight: bold;
-            font-size: 20px;
+            font-size: $text-size-name;
             color: $text-color-item-title;
             padding-bottom: 15px;
         }
         p{
             color: $text-color-item-content;
             font-weight: 600;
-            font-size: 12px;
+            font-size: $text-size-standard;
         }
     }
 }
