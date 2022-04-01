@@ -27,8 +27,10 @@ const inventory = {
         getActiveCategory(state) {
             if(state.activeCategory !== null) return state.categories[state.activeCategory];
         },
-        getFilterByCategories(state) {
-            return state.itemlists.filter(item => item.category === inventory.getters.getActiveCategory(state));
+        getFilterByCategories(state, getters) {
+            console.log('getters', getters);
+            return ''
+            // return state.itemlists.filter(item => item.category === inventory.getters.getActiveCategory(state));
         },
         getItemLists(state) {
             let itemLists = [];
