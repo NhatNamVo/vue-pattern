@@ -3,15 +3,15 @@
     <input v-model="searchText" @keyup.enter="handleSearch" class="input-app input-app__search" placeholder="Search for item" type="text" />
     <button @click="showModal" v-b-modal.add-new-item class="btn-app btn__add">Add new item</button>
     <b-modal ref="modalRef" :hide-footer="true" :hide-header="true" id="add-new-item">
-      <modal-component :valid-status="validStatus" :modal-title="modalTitle" :button-class="buttonClass" v-model="items" @form-submit="handleAddItem"/>
+      <modal-component :invalid-status="invalidStatus" :modal-title="modalTitle" :button-class="buttonClass" v-model="items" @form-submit="handleAddItem"/>
     </b-modal>
   </section>
 </template>
 <script>
 import { mapMutations, mapState } from 'vuex';
-import modalComponent from "../../modal/modal";
+import ModalComponent from "../../dumb-component/inventory-modal/modal-form-inventory";
 export default {
-  name: "inventoryFilter",
+  name: "InventoryTool",
   data() {
     return {
       items: {
@@ -24,11 +24,11 @@ export default {
       modalTitle: 'Add new item to inventory',
       buttonClass: 'btn__submit',
       searchText: '',
-      validStatus: false,
+      invalidStatus: false,
     };
   },
   components: {
-    modalComponent,
+    ModalComponent,
   },
   computed: {
     ...mapState({
@@ -42,18 +42,18 @@ export default {
       },
       handleAddItem() {
           if(this.items.name !== '' && this.items.category !== '' && this.items.leftQty<=this.items.oriQty){
-            this.validStatus = false;
+            this.invalidStatus = false;
             const id = this.itemLists.length + 1;
             this.addNewItem({...this.items, id: id});
             this.resetItems();
             this.$refs.modalRef.onClose();
           }
           else{
-            this.validStatus= true;
+            this.invalidStatus= true;
           }
       },
       showModal() {
-        this.validStatus = false;
+        this.invalidStatus = false;
         this.resetItems();
       },
       handleSearch(event){
@@ -80,12 +80,12 @@ export default {
     },
     items(value){
       if(value.leftQty <= value.oriQty && value.name && value.category){
-        this.validStatus= false;
+        this.invalidStatus= false;
       }
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "./inventory-filter";
+@import "./inventory-tool-bar";
 </style>

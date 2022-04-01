@@ -1,12 +1,22 @@
-.inventory{
-    width: 100%;
-    margin: 20px auto;
-    padding: $padding-item;
-    background-color: $color-bg-list;
-    box-shadow: 0 3px 8px 0 #ccc;
-    border-radius: 5px;
-    min-height: 50vh;
-    max-height: 80vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+.inventory {
+    &__title {
+        font-weight: bold;
+        font-size: 40px;
+        color: $text-color-title-app;
+        margin: 30px 0;
+    }
+
+    &__container {
+        width: 100%;
+        margin: 20px auto;
+        padding: $padding-item;
+        background-color: $color-bg-list;
+        box-shadow: 0 3px 8px 0 #ccc;
+        border-radius: 5px;
+        min-height: 50vh;
+        max-height: 80vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
 }

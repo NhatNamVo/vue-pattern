@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-  name: "inventoryItem",
+  name: "InventoryItem",
   props: ["item"],
 };
 </script>

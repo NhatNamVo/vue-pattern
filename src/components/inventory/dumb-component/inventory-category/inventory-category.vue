@@ -8,11 +8,11 @@
 </template>
 <script>
 import { mapState, mapMutations } from "vuex";
-import categoryItem from './category-item/category-item.vue';
+import CategoryItem from '../inventory-category-item/inventory-category-item.vue';
 export default {
-  name: "categoryComponent",
+  name: "CategoryComponent",
   components: {
-    categoryItem,
+    CategoryItem,
   },
   computed: {
     ...mapState({
@@ -29,5 +29,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import './category';
+@import './inventory-category';
 </style>

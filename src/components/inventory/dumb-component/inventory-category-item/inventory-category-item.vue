@@ -11,10 +11,10 @@
 </template>
 <script>
 export default {
-  name: "categoryItem",
+  name: "CategoryItem",
   props: ["active", "itemName"],
 };
 </script>
 <style lang="scss" scoped>
-@import "./category-item";
+@import "./inventory-category-item";
 </style>

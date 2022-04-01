@@ -10,36 +10,37 @@
           <b-form-input
             :value="itemInfo.name"
             name="name"
-            @change="$emit('input', {...itemInfo, name:$event})"
+            @blur="handleInput"
             class="form__input"
-            :class="{'error': validStatus && !itemInfo.name}"
+            :class="{'error': invalidStatus && !itemInfo.name}"
             type="text"
           />
-          <div class="form__item--error" v-if="validStatus && !itemInfo.name"><small>Name is required</small></div>
+          <div class="form__item--error" v-show="invalidStatus && !itemInfo.name"><small>Name is required</small></div>
         </b-col>
         <b-col cols="6" class="form__item">
           <label class="form__title">FOOD CATEGORY</label>
           <b-form-select
             :value="itemInfo.category"
             name="category"
-            @change="$emit('input', {...itemInfo, category:$event})"
+            @change="handleSelectCategory"
             class="form__select"
-            :class="{'error':validStatus && !itemInfo.category}"
+            :class="{'error':invalidStatus && !itemInfo.category}"
           >
             <template v-for="(item, index) in categories">
               <option :key="index" :value="item">{{ item }}</option>
             </template>
           </b-form-select>
-          <div class="form__item--error" v-if="validStatus && !itemInfo.category"><small>Category is required</small></div>
+          <div class="form__item--error" v-show="invalidStatus && !itemInfo.category"><small>Category is required</small></div>
         </b-col>
         <b-col cols="6" class="form__item">
           <label class="form__title">ORIGINAL QUANTITY</label>
           <b-form-input
             :value="itemInfo.oriQty"
             name="oriQty"
-            @change="$emit('input', {...itemInfo, oriQty:$event})"
+            @blur="handleInputNumberField"
             class="form__input"
             type="number"
+            :number= true
           />
         </b-col>
         <b-col cols="6" class="form__item">
@@ -47,19 +48,20 @@
           <b-form-input
             :value="itemInfo.leftQty"
             name="leftQty"
-            @change="$emit('input', {...itemInfo, leftQty:$event})"
+            @blur="handleInputNumberField"
             class="form__input"
-            :class="{'error':validStatus && itemInfo.leftQty>itemInfo.oriQty}"
+            :class="{'error':invalidStatus && itemInfo.leftQty>itemInfo.oriQty}"
             type="number"
+            :max="itemInfo.oriQty"
           />
-          <div class="form__item--error" v-if="validStatus && itemInfo.leftQty>itemInfo.oriQty"><small>The left quantity must be smaller than the origin quantity</small></div>
+          <div class="form__item--error" v-show="invalidStatus && itemInfo.leftQty>itemInfo.oriQty"><small>The left quantity must be smaller than the origin quantity</small></div>
         </b-col>
         <b-col cols="6" class="form__item">
           <label class="form__title">EXPIRY DATE</label>
           <b-form-datepicker
             :value="itemInfo.expireDate"
             name="expireDate"
-            @input="$emit('input', {...itemInfo, expireDate:$event})"
+            @input="handleInputDate"
             :date-format-options="{
               day: 'numeric',
               month: 'numeric',
@@ -80,21 +82,45 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "modalComponent",
+  name: "ModalComponent",
   model: {
     prop: 'itemInfo',
     event: 'input'
   },
-  props: ["itemInfo","modalTitle", "buttonClass", 'validStatus'],
+  props: ["itemInfo","modalTitle", "buttonClass", 'invalidStatus'],
   computed: {
     ...mapState({
       categories: (state) => state.inventory.categories,
     }),
   },
   methods: {
+    handleInput(event){
+      const {name, value} = event.target;
+      this.emitBind({[name]:value});
+    },
+    handleInputNumberField(event) {
+      const {name, value} = event.target;
+      const number = Math.max(0, parseInt(value));
+
+      if (number === 0) { 
+        this.$nextTick(() => {
+          event.target.value = 0;
+        })
+      }
+      this.emitBind({[name]: number});
+    },
+    handleInputDate(value) {
+      this.emitBind({expireDate:value});
+    },
+    handleSelectCategory(value) {
+      this.emitBind({category:value});
+    },
+    emitBind(object) {
+      this.$emit('input', {...this.itemInfo, ...object});
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "./modal.scss";
+@import "./modal-form-inventory.scss";
 </style>

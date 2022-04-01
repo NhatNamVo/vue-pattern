@@ -1,19 +1,16 @@
 <template>
   <div id="app">
-    <h1 class="app-title">Inventory</h1>
-    <category-component/>
     <inventory-component/>
   </div>
 </template>
 
 <script>
-import categoryComponent from './components/category/category';
-import inventoryComponent from './components/inventory/inventory.vue';
+
+import InventoryComponent from './components/inventory/inventory.vue';
 export default {
   name: 'App',
   components: {
-    categoryComponent,
-    inventoryComponent,
+    InventoryComponent,
   }
 }
 </script>
@@ -28,5 +25,4 @@ export default {
   max-width: 1024px;
   margin: auto;
 }
-@import './App';
 </style>

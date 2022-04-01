@@ -1,20 +1,26 @@
 <template>
-    <section class="inventory">
-        <inventory-filter/>
-        <inventory-list/>
-    </section>
+  <section class="inventory">
+    <h1 class="inventory__title">Inventory</h1>
+    <category-component />
+    <div class="inventory__container">
+        <inventory-tool />
+        <inventory-list />
+    </div>
+  </section>
 </template>
 <script>
-import inventoryFilter from './inventory-filter/inventory-filter.vue';
-import inventoryList from './inventory-list/inventory-list.vue';
+import InventoryTool from "./smart-component/inventory-tool-bar/inventory-tool-bar.vue";
+import CategoryComponent from './dumb-component/inventory-category/inventory-category';
+import InventoryList from "./smart-component/inventory-list/inventory-list.vue";
 export default {
-    name: 'inventoryComponent',
-    components: {
-        inventoryFilter,
-        inventoryList
-    }
-}
+  name: "InventoryComponent",
+  components: {
+    InventoryTool,
+    CategoryComponent,
+    InventoryList,
+  },
+};
 </script>
 <style lang="scss" scoped>
-    @import './inventory';
+@import "./inventory";
 </style>

@@ -10,38 +10,76 @@ const inventory = {
                 'Food Cubboard',
             ],
             activeCategory: null,
-            itemlists: [],
+            itemlists: [
+                {
+                    category:"Fruit & Vegetables",
+                    expireDate:"2022-04-29",
+                    id:1,
+                    leftQty:0,
+                    name:"Carrots",
+                    oriQty:15,
+                },
+                {
+                    category:"Fruit & Vegetables",
+                    expireDate:"2022-04-23",
+                    id:2,
+                    leftQty:0,
+                    name:"Orange",
+                    oriQty:100,
+                },
+                {
+                    category:"Meat & Seafood",
+                    expireDate:"2022-04-15",
+                    id:3,
+                    leftQty:0,
+                    name:"Beef",
+                    oriQty:120,
+                },
+                {
+                    category:"Rice & Noodles",
+                    expireDate:"2022-04-16",
+                    id:4,
+                    leftQty:0,
+                    name:"Bread",
+                    oriQty:120,
+                },
+                {
+                    category:"Dairy, Chilled & Eggs",
+                    expireDate:"2022-04-30",
+                    id:5,
+                    leftQty:0,
+                    name:"Eggs",
+                    oriQty:150,
+                },
+                {
+                    category:"Food Cubboard",
+                    expireDate:"2022-04-30",
+                    id:6,
+                    leftQty:14,
+                    name:"Food Box",
+                    oriQty:123,
+                },
+            ],
             itemSelected: null,
             search: '',
         }
     },
     getters: {
-        getOneItem(state){
-            if(state.itemSelected){
-                return state.itemlists.find(item => item.id === state.itemSelected);
-            }
-            else{
-                return null;
-            }
-        },
-        getActiveCategory(state) {
-            if(state.activeCategory !== null) return state.categories[state.activeCategory];
-        },
-        getFilterByCategories(state, getters) {
-            console.log('getters', getters);
-            return ''
-            // return state.itemlists.filter(item => item.category === inventory.getters.getActiveCategory(state));
+        getSelectedItem(state){
+            return state.itemlists.find(item => item.id === state.itemSelected) || null;
         },
         getItemLists(state) {
-            let itemLists = [];
+            let itemRes = [];
+            const activeCategories = state.categories[state.activeCategory] || '';
+            const filterByCategory = state.itemlists.filter(item => item.category === activeCategories) || [];
             if(state.activeCategory !== null) {
-                itemLists = inventory.getters.getFilterByCategories(state);
+                itemRes = filterByCategory;
             }
             else{
-                itemLists = state.itemlists;
+                itemRes = state.itemlists;
             }
-            if(state.search) return itemLists.filter(item => item.name.toLowerCase().indexOf(state.search.toLowerCase()) !== -1);
-            return itemLists;
+            if(state.search) return itemRes.filter(item => item.name.toLowerCase().indexOf(state.search.toLowerCase()) !== -1);
+            return itemRes;
         }, 
     },
     mutations: {

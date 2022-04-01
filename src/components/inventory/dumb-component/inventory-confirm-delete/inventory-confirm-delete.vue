@@ -7,9 +7,9 @@
 </template>
 <script>
 export default {
-    name: 'confirmDelete',
+    name: 'ConfirmDelete',
 }
 </script>
 <style lang="scss" scoped>
-    @import './confirm-delete';
+    @import './inventory-confirm-delete';
 </style>
